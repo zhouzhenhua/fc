@@ -20,5 +20,5 @@ jobs:
       # Serverless Devs 的官网是通过 Serverless Devs 部署的: http://short.devsapp.cn/cicd/github/action/practice
       - run: s config add --AccessKeyID ${{secrets.AccessKeyID}} --AccessKeySecret ${{secrets.AccessKeySecret}} -a default -f
       #- run: s config add --AccountID ${{secrets.AccountID}} --AccessKeyID ${{secrets.AccessKeyID}} --AccessKeySecret ${{secrets.AccessKeySecret}} -a default
-      #- run: s cli fc-api updateFunction --region cn-hangzhou --serviceName fc-deploy-service --functionName http-trigger-function --code '{"zipFile":"./"}'
-      #- run: s cli fc-api publishVersion --region cn-hangzhou --serviceName fc-deploy-service
+      - run: s cli fc-api updateFunction --region cn-shenzhen --serviceName zzh-service --functionName zzh-fc --code '{"zipFile":"./"}'
+      - run: s cli fc-api publishVersion --region cn-shenzhen --serviceName zzh-service
