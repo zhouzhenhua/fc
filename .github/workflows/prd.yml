@@ -1,0 +1,17 @@
+name: Serverless Devs Project CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  prd-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up environment variables
+        env:
+          HTTP_PROXY: http://120.78.133.243:3218
+          HTTPS_PROXY: https://120.78.133.243:3218
+      - name: get proxy eip
+        run: |
+          curl --proxy $HTTP_PROXY http://cip.cc
