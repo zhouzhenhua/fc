@@ -11,5 +11,5 @@ import json
 def handler(event, context):
   # evt = json.loads(event)
   logger = logging.getLogger()
-  logger.info('hello world i love u')
-  return 'hello world i love u'
+  logger.info('hello world i love uu')
+  return 'hello world i love uu'
