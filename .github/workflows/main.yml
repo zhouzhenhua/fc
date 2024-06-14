@@ -5,20 +5,16 @@ on:
     branches: [ main ]
 
 jobs:
-  serverless-devs-cd:
+  devs-cd:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14
-          registry-url: https://registry.npmjs.org/
       - run: npm install
-      - run: npm install -g @serverless-devs/s
-      # 默认密钥配置指令是阿里云密钥配置指令，更多可以参考：
-      # 如何通过 Github Action使用Serverless Devs 做 CI/CD：http://short.devsapp.cn/cicd/github/action/usage
-      # Serverless Devs 的官网是通过 Serverless Devs 部署的: http://short.devsapp.cn/cicd/github/action/practice
-      - run: s config add --AccessKeyID ${{secrets.AccessKeyID}} --AccessKeySecret ${{secrets.AccessKeySecret}} -a default -f
-      #- run: s config add --AccountID ${{secrets.AccountID}} --AccessKeyID ${{secrets.AccessKeyID}} --AccessKeySecret ${{secrets.AccessKeySecret}} -a default
-      - run: s cli fc-api updateFunction --region cn-shenzhen --serviceName zzh-service --functionName zzh-fc --code '{"zipFile":"./"}'
-      - run: s cli fc-api publishVersion --region cn-shenzhen --serviceName zzh-service
+      - name: Set up environment variables
+        env:
+          HTTP_PROXY: http://120.78.133.243:3218
+          HTTPS_PROXY: https://120.78.133.243:3218
+      - name: get proxy eip
+        run: |
+          curl --proxy $HTTP_PROXY http://cip.cc
+    
